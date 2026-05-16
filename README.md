@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="banner.png" alt="AI-PROMPTER Banner" width="100%" />
+</div>
+
 # AI Prompter (AI 提詞大師) 🎙️
 
 這是一款結合了「即時語音辨識」與「智慧動態滾動」的專業級提詞機應用程式。系統採用 **React + Vite** 打造極簡的毛玻璃 (Glassmorphism) 介面，並透過 **FastAPI** 串接 **Faster-Whisper** 語音辨識模型，實現演講時「你說到哪，提詞機就跟到哪」的無縫體驗。
