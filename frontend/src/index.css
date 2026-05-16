@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&display=swap');
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  overflow: hidden;
+  background-color: #050505;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 核心佈局：預留底部工具欄空間 */
+.prompter-wrapper {
+  position: relative;
+  height: calc(100vh - 140px); 
+  width: 100%;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.prompter-container {
+  height: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+  will-change: scroll-position;
+}
+.prompter-container::-webkit-scrollbar { display: none; }
+
+/* 文字內容區 */
+.scrolling-content {
+  padding: 40vh 12% 40vh 12%;
+  transition: transform 0.2s ease-out;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.text-segment {
+  display: block;
+  color: rgba(255, 255, 255, 0.08);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  
+  line-height: 1.5em;       
+  padding-top: 0.6em;      
+  padding-bottom: 0.6em;   
+  margin-bottom: 0.2em;    
+  
+  transform-origin: center center;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.text-segment.active {
+  color: #ffffff;
+  transform: scale(1.05); 
+  text-shadow: 0 0 35px rgba(59, 130, 246, 0.5);
+  opacity: 1;
+}
+
+/* 對焦框 */
+.fixed-focus-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  height: 280px; 
+  pointer-events: none;
+  z-index: 50;
+  border-radius: 40px;
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.03) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.guide-line {
+  position: absolute;
+  width: 4px;
+  height: 80px;
+  background: #3b82f6;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 1);
+  border-radius: 10px;
+}
+.guide-left { left: -10px; top: 100px; }
+.guide-right { right: -10px; top: 100px; }
+
+/* 上下漸層遮罩 */
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: linear-gradient(to bottom, 
+      #050505 0%, 
+      rgba(5,5,5,0) 25%, 
+      rgba(5,5,5,0) 75%, 
+      #050505 100%);
+}
+
+/* 玻璃面板佈局 */
+.glass-panel {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+}
+
+.glass-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+}
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+.glass-btn:active { transform: scale(0.94); }
+.glass-btn svg { display: block; }
+
+.mirror-mode { transform: scaleX(-1); }
+
+#editor-overlay {
+  background-color: #050505;
+  z-index: 100;
+}
+
+input[type=range] {
+  appearance: none;
+  background-color: rgba(255, 255, 255, 0.05);
+  height: 0.25rem;
+  border-radius: 9999px;
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: #ffffff;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 3px solid #3b82f6;
+}
